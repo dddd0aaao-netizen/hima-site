@@ -1,87 +1,155 @@
-<!DOCTYPE html>
+getElementById('promoModal').style.display='none'">&times;</span>
+        <h2 style="color: var(--main-red);">روج لعملك بـ 1000 د.ع</h2>
+        <p>انشر عملك بـ 1000 دينار فقط، صدقة جارية على موتاك ومساهمة في أعمال الخير.</p>
+        <div class="pay-box">
+            <p>💳 رقم الماستر كارد للتحويل:</p>
+            <strong style="font-size: 18px; color: var(--main-red);">XXXX-XXXX-XXXX-XXXX</strong>
+        </div>
+        <p style="color: #d62828; font-size: 14px; font-weight: bold;">⚠️ بعد التحويل، أرسل "سكرين" ومعلوماتك للواتساب لتفعيل إعلانك:</p>
+        <a href="https://wa.me/964XXXXXXXXX?text=حولت الالف واريد انشر عملي" class="wa-btn">إرسال السكرين (واتساب)</a>
+    </div>
+</div>
+
+<div id="adminModal" class="modal">
+    <div class="modal-content" style="border-top-color: #222;">
+        <span class="close" onclick="document.getElementById('adminModal').style.display='none'">&times;</span>
+        <h2>لوحة المطورين (حسين & محمود)</h2>
+        
+        <div style="background: #fffafa; padding: 15px; border-radius: 12px; border: 1px solid #eee; margin-bottom: 15px;">
+            <p style="font-weight: bold; color: var(--main-red); text-align: right;">➕ إضافة سريعة للمعاينة:</p>
+            <input type="text" id="newName" class="admin-input" placeholder="الاسم (أبو علي)">
+            <input type="text" id="newJob" class="admin-input" placeholder="المهنة والمنطقة">
+            <input type="text" id="newImg" class="admin-input" placeholder="رابط الصورة">
+            <input type="text" id="newPhone" class="admin-input" placeholder="رقم الهاتف">
+            <button onclick="addNewWorker()" style="width: 100%; background: #28a745; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold;">أضف للموقع الآن</button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-item"><small>المشتركين</small><h3 id="count-workers" style="color: var(--main-red); margin: 5px 0;">0</h3></div>
+            <div class="stat-item"><small>الصدقات (د.ع)</small><h3 id="count-money" style="color: #28a745; margin: 5px 0;">0</h3></div>
+        </div>
+    </div>
+</div>
+
+<div onclick="openAdmin()" style="position: fixed; top: 0; left: 0; width: 40px; height: 40px; cursor: pointer; z-index: 9999; opacity: 0;"></div>
+
+<script>
+    const ADMIN_KEY = "1234012340@@";
+
+    function openAdmin() {
+        if (prompt("نظام المطورين (حسين & محمود) - أدخل الرمز:") === ADMIN_KEY) {
+            updateStats();
+            document.getElementById('adminModal').style.display = 'block';
+        } else { alert("الرمز خطأ!"); }
+    }
+
+    function addNewWorker() {
+        const name = document.getElementById('newName').value;
+        const job = document.getElementById('newJob').value;
+        const img = document.getElementById('newImg').value;
+        const phone = document.getElementById('newPhone').value;
+
+        if(name && job && img && phone) {
+            const container = document.getElementById('worker-list');
+            container.innerHTML += `
+                <div class="card">
+                    <img src="${img}" alt="worker">
+                    <div class="worker-tag">${name}</div>
+                    <button class="details-btn" onclick="alert('الاسم: ${name}\\nالعمل: ${job}\\nالمنطقة: النجف\\nالهاتف: ${phone}')">عرض التفاصيل</button>
+                </div>`;
+            updateStats();
+            alert("تمت الإضافة للمعاينة!");
+            // مسح الخانات
+            ['newName','newJob','newImg','newPhone'].forEach(id => document.getElementById(id).value = "");
+        } else { alert("املأ كل الخانات!"); }
+    }
+
+    function updateStats() {
+        const total = document.querySelectorAll('.card').length;
+        document.getElementById('count-workers').innerText = total;
+        document.getElementById('count-money').innerText = (total * 1000).toLocaleString();
+    }
+
+    window.onclick = function(event) {
+        if (event.target.className === 'modal') { event.target.style.display = "none"; }
+    }
+    
+    // تحديث العدادات عند الفتح لأول مرة
+    updateStats();
+</script>
+
+</body>
+</html> <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سوك النجف والكوفة للخير</title>
+    <title>سوق أهلنا - النجف والكوفة</title>
     <style>
-        body { background-color: #ffffff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; }
-        header { background: #e63946; color: white; padding: 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        :root { --main-red: #e63946; --main-white: #ffffff; --bg-gray: #f8f9fa; }
+        body { background-color: var(--main-white); font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding-bottom: 80px; color: #333; }
         
-        /* نظام الشبكة اللانهائي */
-        .main-container { padding: 15px; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
-        
+        /* الهيدر والدعم الفني */
+        header { background: var(--main-red); color: white; padding: 20px 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .support-bar { background: #fff1f2; padding: 8px; text-align: center; font-size: 13px; border-bottom: 1px solid #ffccd5; }
+        .support-bar a { color: var(--main-red); font-weight: bold; text-decoration: none; }
+
+        /* حاوية الصور */
+        .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; padding: 20px; }
+
+        /* كارت العامل */
         .card { 
             background: white; border-radius: 15px; overflow: hidden; 
-            border: 1px solid #eee; box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
-            transition: 0.3s; position: relative;
+            border: 2px solid #f0f0f0; box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+            transition: 0.3s; text-align: center; position: relative;
         }
-        .card:hover { transform: scale(1.02); border-color: #e63946; }
-        
-        .card img { width: 100%; height: 180px; object-fit: cover; }
-        
-        .info-tag { 
-            background: #e63946; color: white; padding: 8px; 
-            text-align: center; font-size: 14px; font-weight: bold;
-        }
-        
-        .details-btn {
-            display: block; width: 100%; padding: 10px; border: none;
-            background: #f8f8f8; color: #e63946; cursor: pointer;
-            font-weight: bold; border-top: 1px solid #eee;
+        .card:hover { border-color: var(--main-red); transform: translateY(-5px); }
+        .card img { width: 100%; height: 170px; object-fit: cover; background: #eee; }
+        .worker-tag { background: var(--main-red); color: white; padding: 8px; font-weight: bold; font-size: 14px; }
+        .details-btn { width: 100%; padding: 12px; border: none; background: white; color: var(--main-red); cursor: pointer; font-weight: bold; border-top: 1px solid #eee; }
+
+        /* زر الترويج العائم */
+        .fab {
+            position: fixed; bottom: 25px; left: 25px;
+            background: var(--main-red); color: white; width: 65px; height: 65px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 35px; box-shadow: 0 5px 20px rgba(230,57,70,0.4); text-decoration: none; z-index: 1000;
         }
 
-        /* زر النشر الثابت */
-        .fab {
-            position: fixed; bottom: 20px; left: 20px;
-            background: #e63946; color: white; width: 60px; height: 60px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 30px; box-shadow: 0 4px 15px rgba(230,57,70,0.4); text-decoration: none;
-        }
+        /* النوافذ المنبثقة */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); overflow-y: auto; }
+        .modal-content { background: white; margin: 10% auto; padding: 25px; width: 85%; border-radius: 20px; text-align: center; border-top: 10px solid var(--main-red); direction: rtl; }
+        .pay-box { background: #fff5f5; border: 1px dashed var(--main-red); padding: 15px; border-radius: 10px; margin: 15px 0; }
+        .wa-btn { background: #25D366; color: white; padding: 12px 20px; border-radius: 30px; text-decoration: none; display: inline-block; font-weight: bold; width: 80%; }
+        .close { float: left; font-size: 28px; font-weight: bold; cursor: pointer; color: #aaa; }
+
+        /* ستايل لوحة المطورين */
+        .admin-input { width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0; }
+        .stat-item { background: #f8f9fa; padding: 10px; border-radius: 10px; border: 1px solid #eee; }
     </style>
 </head>
 <body>
 
+<div class="support-bar">
+    تحتاج مساعدة؟ تواصل مع الدعم الفني: <a href="https://wa.me/964XXXXXXXXX">اضغط هنا</a>
+</div>
+
 <header>
-    <h1>سوك أهلنا الخيرية</h1>
-    <p>أهل المهن في النجف والكوفة</p>
+    <h1>سوق أهلنا الخيرية</h1>
+    <p>دليل المهن الحرة في النجف الأشرف والكوفة</p>
 </header>
 
-<div class="main-container" id="ads-container">
+<div class="container" id="worker-list">
+    <div class="card">
+        <img src="https://via.placeholder.com/170" alt="مصلح">
+        <div class="worker-tag">أبو جاسم - حداد</div>
+        <button class="details-btn" onclick="alert('المنطقة: النجف - حي النصر\nرقم الهاتف: 0770XXXXXXX')">عرض التفاصيل</button>
     </div>
+</div>
 
-<a href="#" class="fab" onclick="checkLogin()">+</a>
+<a href="#" class="fab" onclick="document.getElementById('promoModal').style.display='block'">+</a>
 
-<script>
-    // مصفوفة تجريبية (بالحقيقة هاي تجي من قاعدة البيانات)
-    const workers = [
-        { name: "أبو جاسم", job: "حداد", area: "النجف - حي النصر", img: "https://via.placeholder.com/150" },
-        { name: "علي السباك", job: "تأسيسات", area: "الكوفة - حي السراي", img: "https://via.placeholder.com/150" },
-        // تخيل هنا اكو مليون اسم.. السكربت راح يعالجهم
-    ];
-
-    const container = document.getElementById('ads-container');
-
-    // وظيفة لعرض الإعلانات
-    function displayWorkers() {
-        workers.forEach(worker => {
-            const card = `
-                <div class="card">
-                    <img src="${worker.img}" alt="worker">
-                    <div class="info-tag">${worker.name} - ${worker.job}</div>
-                    <button class="details-btn" onclick="alert('المنطقة: ${worker.area}')">التفاصيل</button>
-                </div>
-            `;
-            container.innerHTML += card;
-        });
-    }
-
-    function checkLogin() {
-        alert("يرجى تسجيل الدخول أولاً لنشر إعلانك بـ 1000 دينار للخير");
-    }
-
-    displayWorkers();
-</script>
-
-</body>
-</html>
+<div id="promoModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="document.
