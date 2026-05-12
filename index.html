@@ -1,15 +1,139 @@
-<!DOCTYPE html>
+<input type="text" id="custName" placeholder="اسـم المشترك الكامل" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" id="custPhone" placeholder="رقم الواتساب (مثال: 077...)" required>
+            </div>
+            <div class="form-group">
+                <select id="custService">
+                    <option value="حلاقة كلاسيك">اشتراك حلاقة كلاسيك (شهر)</option>
+                    <option value="حلاقة VIP">اشتراك VIP شامل (شهر)</option>
+                    <option value="تنظيف بشرة">جلسات تنظيف بشرة</option>
+                </select>
+            </div>
+            <button type="button" onclick="submitToHima()" class="btn btn-whatsapp">إرسال البيانات وتأكيد الاشتراك ✅</button>
+        </form>
+    </div>
+
+    <div class="section-title">المطور والمسؤول</div>
+    <div class="card" style="text-align: center;">
+        <p>للمشاكل التقنية أو إضافة خدمات برمجية جديدة</p>
+        <a href="https://wa.me/9647769942923" class="btn btn-dev">تحدث مع المطور هيما 👨‍💻</a>
+    </div>
+
+</div>
+
+<footer>
+    &copy; 2026 جميع الحقوق محفوظة لمنصة HIMA HUB | النجف الأشرف
+</footer>
+
+<script>
+function submitToHima() {
+    const name = document.getElementById('custName').value;
+    const phone = document.getElementById('custPhone').value;
+    const service = document.getElementById('custService').value;
+    const date = new Date().toLocaleDateString('ar-EG');
+
+    if(name == "" || phone == "") {
+        alert("يا بطل، املأ الاسم والرقم أولاً!");
+        return;
+    }
+
+    const msg = طلب اشتراك جديد 🚀%0A---%0Aالاسم: ${name}%0Aالرقم: ${phone}%0Aالخدمة: ${service}%0Aالتاريخ: ${date}%0A---%0Aتم تحويل المبلغ، يرجى التفعيل ونظام التذكير.;
+    
+    window.location.href = https://wa.me/9647769942923?text=${msg};
+}
+</script>
+
+</body>
+</html><!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع هيمة</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIMA HUB | منصة هيما الاحترافية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #d4af37; --dark: #0a0a0a; --card-bg: #161616; --text: #e0e0e0; }
+        body { margin: 0; padding: 0; background-color: var(--dark); color: var(--text); font-family: 'Cairo', sans-serif; overflow-x: hidden; }
+        
+        /* تأثير الخلفية المتحركة */
+        header { 
+            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+            padding: 60px 20px; text-align: center; border-bottom: 3px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        header h1 { color: var(--gold); margin: 0; font-size: 3rem; letter-spacing: 2px; text-transform: uppercase; }
+        header p { font-size: 1.1rem; opacity: 0.8; margin-top: 10px; }
+
+        .container { max-width: 900px; margin: 30px auto; padding: 20px; }
+
+        .section-title { 
+            font-size: 1.8rem; color: var(--gold); border-right: 5px solid var(--gold); 
+            padding-right: 15px; margin: 50px 0 25px; 
+        }
+
+        .card { 
+            background: var(--card-bg); border-radius: 20px; padding: 30px; 
+            margin-bottom: 30px; border: 1px solid #222; transition: 0.4s;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--gold); }
+
+        /* طرق الدفع */
+        .payment-info { background: #222; padding: 20px; border-radius: 15px; margin: 20px 0; border: 1px dashed var(--gold); }
+        .payment-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .copy-text { color: var(--gold); font-weight: bold; font-size: 1.3rem; }
+
+        /* الفورم - التسجيل */
+        .form-group { margin-bottom: 15px; }
+        input, select { 
+            width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #333; 
+            background: #000; color: white; font-family: 'Cairo'; font-size: 1rem;
+            box-sizing: border-box;
+        }
+        input:focus { border-color: var(--gold); outline: none; }
+
+        .btn { 
+            display: block; width: 100%; padding: 18px; border-radius: 12px; 
+            text-decoration: none; font-weight: bold; font-size: 1.1rem; 
+            text-align: center; border: none; cursor: pointer; transition: 0.3s;
+            margin-top: 10px;
+        }
+        .btn-whatsapp { background: #25d366; color: white; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
+        .btn-dev { background: transparent; border: 2px solid var(--gold); color: var(--gold); }
+        .btn:hover { filter: brightness(1.2); transform: scale(1.02); }
+
+        footer { text-align: center; padding: 50px; opacity: 0.5; font-size: 0.9rem; }
+    </style>
 </head>
-<body style="background:#1e3a8a; color:white; text-align:center; padding-top:100px; font-family:sans-serif;">
-    <div style="border: 2px solid white; display:inline-block; padding: 20px; border-radius: 15px;">
-        <h1>تم تشغيل الموقع بنجاح ✅</h1>
-        <p>هذا الموقع مرفوع على سيرفرات GitHub العالمية.</p>
-        <p style="color:#60a5fa;">الرابط الآن يعمل 24 ساعة ومن أي مكان!</p>
-    </div>
-</body>
-</html>
+<body>
+
+<header>
+    <h1>HIMA HUB ✂️</h1>
+    <p>النظام الذكي لإدارة الاشتراكات والخدمات</p>
+</header>
+
+<div class="container">
+    
+    <div class="section-title">قسم الدفع المباشر</div>
+    <div class="card">
+        <p>يرجى تحويل مبلغ الاشتراك لأحد الحسابات التالية:</p>
+        <div class="payment-info">
+            <div class="payment-item">
+                <span>رقم الماستر كارد:</span>
+                <span class="copy-text">4175648874</span>
+            </div>
+            <hr style="border: 0.1px solid #333;">
+            <div class="payment-item">
+                <span>رقم رصيد آسيا:</span>
+                <span class="copy-text">07769942923</span>
+            </div>
+        </div>
+        <p style="font-size: 0.9rem; color: #888;">* بعد التحويل، املأ الاستمارة أدناه لتلقي رسالة التأكيد والتذكير الشهري.</p>
+    </div>
+
+    <div class="section-title">تسجيل اشتراك (تذكير تلقائي)</div>
+    <div class="card">
+        <form id="regForm">
+            <div class="form-group">
